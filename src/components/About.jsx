@@ -1,33 +1,35 @@
 const About = () => {
   const aboutItems = [
     {
-      label: "Project done",
-      number: 2,
-    },
-    {
       label: "Years of experience",
       number: 4,
     },
+    {
+      label: "Projects done",
+      number: 2,
+    }
   ];
   return (
     <section id="about" className="section">
       <div className="container">
-        <div className="bg-zinc-800/50 p-7 rounded-2xl md:p-12">
+        <div className="bg-zinc-800/50 p-7 rounded-2xl md:p-12 reveal-up">
           <p className="text-zinc-300 mb-4 md:mb-8 md:text-xl md:max-w-[60ch] ">
-            Welcome! I&apos;m Fabián, a professional web developer with a knack
-            for crafting visually stunning and highly functional websites.
-            Combining creativity and technical expertise. I transform your
-            vision into digital masterpiece that excels in both appearance and
-            performance.
+          Welcome! I'm Fabián Espinoza, a full-stack developer who takes ideas from concept to deployment.
+          I start by understanding what users really need, then build complete end-to-end applications that businesses can actually rely on.
           </p>
+          <p className="text-zinc-300 mb-4 md:mb-8 md:text-xl md:max-w-[60ch] ">
+          My toolkit includes React, Next.js, Supabase and modern web technologies across the entire development stack. 
+          I focus on creating scalable, maintainable, and efficient applications that deliver real value to users.
+          </p>
+          
           <div className="flex flex-wrap items-center gap-4 md:gap-7">
             {aboutItems.map((item, key) => (
               <div key={key} className="about-item">
                 <div className="flex items-center md:mb-2">
-                  <span className="text-2xl font-bold ">{item.number}</span>
-                  <span className="">+</span>
+                  <span className="text-2xl font-semibold md:text-4xl pr-0.5">{item.number}</span>
+                  <span className="text-sky-400 font-semibold md:text-3xl">+</span>
                 </div>
-                <p className="">{item.label}</p>
+                <p className="text-sm text-zinc-400">{item.label}</p>
               </div>
             ))}
             <img
@@ -35,7 +37,7 @@ const About = () => {
               alt="Logo"
               width={30}
               height={30}
-              className=""
+              className="ml-auto md:w-[40px] md:h-[40px]"
             />
           </div>
         </div>

@@ -9,7 +9,7 @@ const Hero = () => {
           <div className="flex items-center gap-3">
             <figure className="img-box w-9 h-9 rounded-lg">
               <img
-                src="/images/avatar-1.jpg"
+                src="/images/avatar.jpg"
                 width={40}
                 height={40}
                 alt="Fabian Espinoza portrait"
@@ -24,10 +24,12 @@ const Hero = () => {
             </div>
           </div>
           <h2 className="headline-1 max-w-[15ch] sm:max-w-[20ch] lg:max-[15ch] mt-5 mb-8 lg:mb-10">
-            Building Scalable Modern Websites for the Future
+            Full-Stack Developer Transforming Ideas into Modern Web Solutions
           </h2>
           <div className="flex items-center gap-3">
-            <ButtonPrimary label="Download CV" icon="download" />
+            <a href="/pdf/Cv_Fabian_Espinoza.pdf" download>
+              <ButtonPrimary label="Download CV" icon="download" />
+            </a>
             <ButtonOutline
               href="#about"
               label="Scroll down"
@@ -41,12 +43,12 @@ const Hero = () => {
           to-65% rounded-[60px] overflow-hidden"
           >
             <img
-              src="images/hero-banner.png"
-              //    src="images/hero-fabian.png"
+              // src="images/hero-banner.png"
+              src="images/hero-fabian.png"
               alt="Fabian Espinoza"
               width={656}
-              height={800}
-              className="w-full"
+              height={900}
+              className="w-full h-[600px] object-cover"
             />
           </figure>
         </div>
