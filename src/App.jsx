@@ -49,7 +49,7 @@ const App = () => {
         <About />
         <Experience />
         <Skill />
-        <Work />
+        {/* <Work /> */}
         <Contact />
       </main>
       <Footer />
