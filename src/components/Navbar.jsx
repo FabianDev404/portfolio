@@ -1,15 +1,18 @@
 import { useRef, useEffect } from "react";
 import PropTypes from "prop-types";
+import { useTranslation } from 'react-i18next';
 const Navbar = ({ navOpen }) => {
+  const { t, i18n } = useTranslation();
   const lastActiveLink = useRef();
   const activeBox = useRef();
 
-
   const initActiveBox = () => {
-    activeBox.current.style.top = lastActiveLink.current.offsetTop + "px";
-    activeBox.current.style.left = lastActiveLink.current.offsetLeft + "px";
-    activeBox.current.style.width = lastActiveLink.current.offsetWidth + "px";
-    activeBox.current.style.height = lastActiveLink.current.offsetHeight + "px";
+    if (activeBox.current && lastActiveLink.current) {
+      activeBox.current.style.top = lastActiveLink.current.offsetTop + "px";
+      activeBox.current.style.left = lastActiveLink.current.offsetLeft + "px";
+      activeBox.current.style.width = lastActiveLink.current.offsetWidth + "px";
+      activeBox.current.style.height = lastActiveLink.current.offsetHeight + "px";
+    }
   };
 
   const activeCurrentLink = (e) => {
@@ -24,35 +27,43 @@ const Navbar = ({ navOpen }) => {
   };
 
   useEffect(() => initActiveBox(), []);
+
+
   window.addEventListener("resize", initActiveBox);
+
   const navItems = [
     {
-      label: "Home",
+      label: "navigation.home",
       link: "#home",
       className: "nav-link active",
       ref: lastActiveLink,
     },
     {
-      label: "About",
+      label: "navigation.about",
       link: "#about",
       className: "nav-link",
     },
     {
-      label: "Experience",
+      label: "navigation.experience",
       link: "#experience",
       className: "nav-link",
     },
     {
-      label: "Work",
+      label: "navigation.work",
       link: "#work",
       className: "nav-link",
     },
     {
-      label: "Contact",
+      label: "navigation.contact",
       link: "#contact",
       className: "nav-link md:hidden",
     },
   ];
+
+  if (!i18n.isInitialized) {
+    return <nav className="navbar">Loading...</nav>;
+  }
+
   return (
     <nav className={"navbar " + (navOpen ? "active" : "")}>
       {navItems.map(({ label, link, className, ref }, key) => (
@@ -63,7 +74,7 @@ const Navbar = ({ navOpen }) => {
           ref={ref}
           onClick={activeCurrentLink}
         >
-          {label}
+          {t(label)}
         </a>
       ))}
       <div className="active-box" ref={activeBox}></div>

@@ -1,25 +1,27 @@
 import React from "react";
 import { ButtonPrimary } from "./Button";
+import { useTranslation } from "react-i18next";
 const Footer = () => {
+  const { t } = useTranslation();
   const sitemap = [
     {
-      label: "Home",
+      label: t("navigation.home"),
       href: "#home",
     },
     {
-      label: "About",
+      label: t("navigation.about"),
       href: "#about",
     },
     {
-      label: "Experience",
+      label: t("navigation.experience"),
       href: "#experience",
     },
     {
-      label: "Work",
+      label: t("navigation.work"),
       href: "#work",
     },
     {
-      label: "Contact me",
+      label: t("navigation.contact"),
       href: "#contact",
     },
   ];
@@ -40,18 +42,18 @@ const Footer = () => {
         <div className="lg:grid lg:grid-cols-2 ">
           <div className="mb-10">
             <h2 className="headline-1 mb-8 lg:max-w-[12ch] reveal-up">
-              Let&apos;s work together today!
+              {t("footer.cta")}
             </h2>
             <ButtonPrimary
               href="mailto:fabianespinozadeveloper@gmail.com"
-              label="Start project"
+              label={t("buttons.startProject")}
               icon="chevron_right"
               classes="reveal-up"
             />
           </div>
           <div className="grid grid-cols-2 gap-4 lg:pl-20">
             <div>
-              <p className="mb-2 reveal-up">Sitemap</p>
+              <p className="mb-2 reveal-up">{t("footer.sitemap")}</p>
 
               <ul>
                 {sitemap.map((item, key) => (
@@ -68,7 +70,7 @@ const Footer = () => {
             </div>
 
             <div>
-              <p className="mb-2 reveal-up">Socials</p>
+              <p className="mb-2 reveal-up">{t("footer.socials")}</p>
 
               <ul>
                 {socials.map((item, key) => (

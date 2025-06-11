@@ -1,6 +1,8 @@
 import React from "react";
 import ProjectCard from "./ProjectCard";
+import { useTranslation } from "react-i18next";
 const Work = () => {
+  const { t } = useTranslation();
   const works = [
     {
       imgSrc: "/images/project-1.jpg",
@@ -42,7 +44,7 @@ const Work = () => {
   return (
     <section id="work" className="section">
       <div className="container">
-        <h2 className="headline-2 mb-8 reveal-up">My portfolio highlights</h2>
+        <h2 className="headline-2 mb-8 reveal-up">{t("portfolio.title")}</h2>
 
         <div className="grid gap-x-4 gap-y-5 grid-cols-[repeat(auto-fit,_minmax(280px,_1fr))]">
             {works.map((item, key) => (

@@ -1,4 +1,6 @@
+import { useTranslation } from "react-i18next";
 const Contact = () => {
+  const { t } = useTranslation();
   const socialLinks = [
     {
       href: "https://github.com/FabianDev404",
@@ -41,10 +43,10 @@ const Contact = () => {
     <section className="section" id="contact">
       <div className="container lg:grid lg:grid-cols-2 lg:items-stretch">
         <div className="mb-12 lg:mb-0 lg:flex lg:flex-col">
-          <h2 className="headline-2 lg:max-w-[12ch] reveal-up">Contact me for collaboration</h2>
+          <h2 className="headline-2 lg:max-w-[12ch] reveal-up">{t("contact.title")}</h2>
 
           <p className="text-zinc-400 mt-3 mb-8 max-w-[50ch] lg:max-w-[30ch] reveal-up">
-          Reach out today to discuss your project needs or job opportunities and start collaborating on something amazing!
+            {t("contact.subtitle")}
           </p>
 
           <div className="flex items-center gap-2 mt-auto">
@@ -62,7 +64,7 @@ const Contact = () => {
           <div className="md:grid md:items-center md:grid-cols-2 md:gap-2">
             <div className="mb-4">
               <label htmlFor="name" className="label reveal-up">
-                Name
+                {t("contact.form.name")}
               </label>
               <input
                 type="text"
@@ -76,14 +78,14 @@ const Contact = () => {
             </div>
             <div className="mb-4">
               <label htmlFor="email" className="label reveal-up">
-                Email
+                {t("contact.form.email")}
               </label>
               <input
                 type="text"
                 id="email"
                 name="email"
                 autoComplete="email"
-                placeholder="erwin@example.com"
+                placeholder={t("contact.form.emailPlaceholder")}
                 required
                 className="text-field reveal-up"
               />
@@ -92,12 +94,12 @@ const Contact = () => {
 
           <div className="mb-4">
             <label htmlFor="message" className="label reveal-up">
-              Message
+              {t("contact.form.message")}
             </label>
             <textarea
               id="message"
               name="message"
-              placeholder="Hi!"
+              placeholder={t("contact.form.messagePlaceholder")}
               required
               className="text-field resize-y min-h-32 max-h-80 reveal-up"
               autoComplete="off"
@@ -105,7 +107,7 @@ const Contact = () => {
           </div>
 
           <button type="submit" className="btn btn-primary [&]:max-w-full w-full justify-center reveal-up">
-            Submit
+            {t("buttons.submit")}
           </button>
         </form>
       </div>

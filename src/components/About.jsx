@@ -1,11 +1,13 @@
+import { useTranslation } from 'react-i18next'; 
 const About = () => {
+  const { t } = useTranslation();
   const aboutItems = [
     {
-      label: "Years of experience",
+      label: t("about.yearsExperience"),
       number: 4,
     },
     {
-      label: "Projects done",
+      label: t("about.projectsDone"),
       number: 2,
     }
   ];
@@ -14,12 +16,10 @@ const About = () => {
       <div className="container">
         <div className="bg-zinc-800/50 p-7 rounded-2xl md:p-12 reveal-up">
           <p className="text-zinc-300 mb-4 md:mb-8 md:text-xl md:max-w-[60ch] ">
-          Welcome! I'm Fabián Espinoza, a full-stack developer who takes ideas from concept to deployment.
-          I start by understanding what users really need, then build complete end-to-end applications that businesses can actually rely on.
+          {t("about.welcomeText")}
           </p>
           <p className="text-zinc-300 mb-4 md:mb-8 md:text-xl md:max-w-[60ch] ">
-          My toolkit includes React, Next.js, Supabase and modern web technologies across the entire development stack. 
-          I focus on creating scalable, maintainable, and efficient applications that deliver real value to users.
+          {t("about.toolkitText")}
           </p>
           
           <div className="flex flex-wrap items-center gap-4 md:gap-7">

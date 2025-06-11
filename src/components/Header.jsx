@@ -1,6 +1,9 @@
 import Navbar from "./Navbar";
 import { useState } from "react";
+import LanguageSwitcher from "./LanguageSwitcher";
+import { useTranslation } from "react-i18next";
 const Header = () => {
+  const { t } = useTranslation();
   const [navOpen, setNavOpen] = useState(false);
   return (
     <header
@@ -11,27 +14,24 @@ const Header = () => {
         className="max-w-screen-2xl w-full mx-auto px-4 flex justify-between items-center md:px-6 
       md:grid md:grid-cols-[1fr,3fr,1fr]"
       >
-        <h1>
-          <a href="/" className="logo">
-            <img
-              src="/images/logo.svg"
-              alt="Fabian Espinoza"
-              width={40}
-              height={40}
-            />
-          </a>
-        </h1>
+        <LanguageSwitcher/>
 
         <div className="relative md:justify-self-center">
-          <button className="menu-btn md:hidden" onClick={() => setNavOpen(!navOpen)}>
+          <button
+            className="menu-btn md:hidden"
+            onClick={() => setNavOpen(!navOpen)}
+          >
             <span className="material-symbols-rounded">
               {navOpen ? "close" : "menu"}
             </span>
           </button>
           <Navbar navOpen={navOpen} />
         </div>
-        <a href="#contact" className="btn btn-secondary max-md:hidden md:justify-self-end">
-          Contact Me
+        <a
+          href="#contact"
+          className="btn btn-secondary max-md:hidden md:justify-self-end"
+        >
+          {t("buttons.contactMe")}
         </a>
       </div>
     </header>

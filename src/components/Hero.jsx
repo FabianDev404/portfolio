@@ -1,7 +1,9 @@
 import React from "react";
-
+import { useTranslation } from "react-i18next";
 import { ButtonPrimary, ButtonOutline } from "./Button";
 const Hero = () => {
+  const { t } = useTranslation();
+
   return (
     <section id="home" className="pt-28 lg:pt-36">
       <div className="container lg:grid lg:grid-cols-2 items-center lg:gap-10">
@@ -16,23 +18,26 @@ const Hero = () => {
                 className="img-cover"
               />
             </figure>
-            <div className="flex items-center gap-1.5 text-zinc-400 text-sm tracking-wide">
-              <span className="relative w-2 h-2 rounded-full bg-emerald-400">
-                <span className="absolute inset-0 rounded-full bg-emerald-400 animate-ping"></span>
-              </span>
-              Available for work
+            <div className="flex flex-col">
+              <p>Fabián Espinoza</p>
+              <div className="flex items-center gap-1.5 text-zinc-400 text-sm tracking-wide">
+                <span className="relative w-2 h-2 rounded-full bg-emerald-400">
+                  <span className="absolute inset-0 rounded-full bg-emerald-400 animate-ping"></span>
+                </span>
+                {t("hero.availableForWork")}
+              </div>
             </div>
           </div>
           <h2 className="headline-1 max-w-[15ch] sm:max-w-[20ch] lg:max-[15ch] mt-5 mb-8 lg:mb-10">
-            Full-Stack Developer Transforming Ideas into Modern Web Solutions
+            {t("hero.headline")}
           </h2>
           <div className="flex items-center gap-3">
             <a href="/pdf/Cv_Fabian_Espinoza.pdf" download>
-              <ButtonPrimary label="Download CV" icon="download" />
+              <ButtonPrimary label={t("buttons.downloadCV")} icon="download" />
             </a>
             <ButtonOutline
               href="#about"
-              label="Scroll down"
+              label={t("buttons.scrollDown")}
               icon="arrow_downward"
             />
           </div>
@@ -43,7 +48,6 @@ const Hero = () => {
           to-65% rounded-[60px] overflow-hidden"
           >
             <img
-              // src="images/hero-banner.png"
               src="images/hero-fabian.png"
               alt="Fabian Espinoza"
               width={656}

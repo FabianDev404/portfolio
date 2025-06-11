@@ -1,26 +1,25 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 
 const Timeline = () => {
+  const { t } = useTranslation();
   // This component renders a timeline with three events.
   // Each event has a date, title, description 
   const timelineData = [
     {
       date: "January 2025",
       title: "Freelance Developer",
-      description:
-        "Development of custom solutions for independent clients. Focused on creating functional and modern products using technologies such as Next.js, Tailwind CSS, and Supabase. I work across the full development lifecycle—from gathering requirements and designing interfaces to coding, testing, and deployment.",
+      description: t("experience.freelance.description")
     },
     {
       date: "2022 - 2024",
       title: "Software Engineer Jr - Terumo Neuro",
-      description:
-        "Developed In-House web applications using React.js to automate manufacturing workflows and reporting systems. Built reusable components, improved app performance, and maintained critical tools used daily across departments. Collaborated with cross-functional teams to translate business needs into scalable technical solutions.",
+      description: t("experience.terumoJr.description")
     },
     {
       date: "2021 - 2022",
       title: "Software development Intern - Terumo Neuro",
-      description:
-        "Added new features and enhancing existing modules. Provided technical support to staff in both the United States and Costa Rica, helping resolve issues and maintain daily operations. Gained hands-on experience in debugging, maintaining codebases, and understanding enterprise workflows.",
+      description: t("experience.terumoIntern.description")
     },
   ];
 
