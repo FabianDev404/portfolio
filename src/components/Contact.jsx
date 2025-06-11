@@ -1,6 +1,16 @@
+import React, { useRef, useState } from "react";
+import emailjs from "@emailjs/browser";
 import { useTranslation } from "react-i18next";
+
+const SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+const TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
+const PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
+
 const Contact = () => {
   const { t } = useTranslation();
+  const form = useRef();
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  
   const socialLinks = [
     {
       href: "https://github.com/FabianDev404",
@@ -37,13 +47,170 @@ const Contact = () => {
         </svg>
       ),
       alt: "LinkedIn",
-    }
+    },
   ];
+
+  // Función para mostrar toast de carga
+  const showLoadingToast = () => {
+    const toastId = `loading-toast-${Date.now()}`;
+    const toastHtml = `
+      <div id="${toastId}" class="max-w-xs bg-white border border-gray-200 rounded-xl shadow-lg dark:bg-neutral-800 dark:border-neutral-700 toast-loading fixed bottom-5 right-5 z-50" role="alert">
+        <div class="flex items-center p-4">
+          <div class="animate-spin inline-block size-4 border-[3px] border-current border-t-transparent text-blue-600 rounded-full dark:text-blue-500" role="status" aria-label="loading">
+            <span class="sr-only">Loading...</span>
+          </div>
+          <div class="ms-3">
+            <p class="text-sm text-gray-700 dark:text-neutral-400">
+              ${t("toast.sending") || "Enviando mensaje..."}
+            </p>
+          </div>
+        </div>
+      </div>
+    `;
+    
+    document.body.insertAdjacentHTML('beforeend', toastHtml);
+    return toastId;
+  };
+
+  // Función para mostrar toast de éxito
+  const showSuccessToast = () => {
+    const toastId = `success-toast-${Date.now()}`;
+    const toastHtml = `
+      <div id="${toastId}" class="max-w-xs bg-teal-50 border border-teal-200 rounded-xl shadow-lg dark:bg-teal-800/30 dark:border-teal-900 toast-success fixed bottom-5 right-5 z-50" role="alert">
+        <div class="flex p-4">
+          <div class="shrink-0">
+            <svg class="shrink-0 size-4 text-teal-500 mt-0.5" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+              <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.061L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
+            </svg>
+          </div>
+          <div class="ms-3">
+            <p class="text-sm text-gray-800 dark:text-neutral-400">
+              ${t("toast.success") || "¡Mensaje enviado exitosamente!"}
+            </p>
+          </div>
+          <div class="ps-3 ms-auto">
+            <div class="-mx-1.5 -my-1.5">
+              <button type="button" class="inline-flex bg-teal-50 rounded-lg p-1.5 text-teal-500 hover:bg-teal-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-teal-50 focus:ring-teal-600 dark:bg-transparent dark:hover:bg-teal-800/50 dark:text-teal-600" onclick="document.getElementById('${toastId}').remove()">
+                <span class="sr-only">Dismiss</span>
+                <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 6 12 12"/><path d="m6 18 12-12"/></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
+    
+    document.body.insertAdjacentHTML('beforeend', toastHtml);
+    
+    // Auto-remover después de 5 segundos
+    setTimeout(() => {
+      const toast = document.getElementById(toastId);
+      if (toast) {
+        toast.remove();
+      }
+    }, 5000);
+    
+    return toastId;
+  };
+
+  // Función para mostrar toast de error
+  const showErrorToast = (errorMessage = null) => {
+    const toastId = `error-toast-${Date.now()}`;
+    const message = errorMessage || t("toast.error") || "Error al enviar el mensaje. Inténtalo de nuevo.";
+    
+    const toastHtml = `
+      <div id="${toastId}" class="max-w-xs bg-red-50 border border-red-200 rounded-xl shadow-lg dark:bg-red-800/30 dark:border-red-900 toast-error fixed bottom-5 right-5 z-50" role="alert">
+        <div class="flex p-4">
+          <div class="shrink-0">
+            <svg class="shrink-0 size-4 text-red-500 mt-0.5" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+              <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z"/>
+            </svg>
+          </div>
+          <div class="ms-3">
+            <p class="text-sm text-gray-800 dark:text-neutral-400">
+              ${message}
+            </p>
+          </div>
+          <div class="ps-3 ms-auto">
+            <div class="-mx-1.5 -my-1.5">
+              <button type="button" class="inline-flex bg-red-50 rounded-lg p-1.5 text-red-500 hover:bg-red-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-red-50 focus:ring-red-600 dark:bg-transparent dark:hover:bg-red-800/50 dark:text-red-600" onclick="document.getElementById('${toastId}').remove()">
+                <span class="sr-only">Dismiss</span>
+                <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 6 12 12"/><path d="m6 18 12-12"/></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
+    
+    document.body.insertAdjacentHTML('beforeend', toastHtml);
+    
+    // Auto-remover después de 7 segundos
+    setTimeout(() => {
+      const toast = document.getElementById(toastId);
+      if (toast) {
+        toast.remove();
+      }
+    }, 7000);
+    
+    return toastId;
+  };
+
+  // Función para remover toast específico
+  const removeToast = (toastId) => {
+    const toast = document.getElementById(toastId);
+    if (toast) {
+      toast.remove();
+    }
+  };
+
+  const sendEmail = async (e) => {
+    e.preventDefault();
+    
+    // Prevenir múltiples envíos
+    if (isSubmitting) return;
+    
+    setIsSubmitting(true);
+    
+    // Mostrar toast de carga
+    const loadingToastId = showLoadingToast();
+
+    try {
+      await emailjs.sendForm(SERVICE_ID, TEMPLATE_ID, form.current, {
+        publicKey: PUBLIC_KEY,
+      });
+      
+      // Remover toast de carga
+      removeToast(loadingToastId);
+      
+      // Mostrar toast de éxito
+      showSuccessToast();
+      
+      // Resetear formulario
+      form.current.reset();
+      
+      console.log("SUCCESS!");
+      
+    } catch (error) {
+      // Remover toast de carga
+      removeToast(loadingToastId);
+      
+      // Mostrar toast de error
+      showErrorToast();
+      
+      console.log("FAILED...", error.text);
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   return (
     <section className="section" id="contact">
       <div className="container lg:grid lg:grid-cols-2 lg:items-stretch">
         <div className="mb-12 lg:mb-0 lg:flex lg:flex-col">
-          <h2 className="headline-2 lg:max-w-[12ch] reveal-up">{t("contact.title")}</h2>
+          <h2 className="headline-2 lg:max-w-[12ch] reveal-up">
+            {t("contact.title")}
+          </h2>
 
           <p className="text-zinc-400 mt-3 mb-8 max-w-[50ch] lg:max-w-[30ch] reveal-up">
             {t("contact.subtitle")}
@@ -51,16 +218,21 @@ const Contact = () => {
 
           <div className="flex items-center gap-2 mt-auto">
             {socialLinks.map((item, key) => (
-              <a href={item.href} key={key} target="_blank" className="w-12 h-12 grid place-items-center ring-inset 
+              <a
+                href={item.href}
+                key={key}
+                target="_blank"
+                className="w-12 h-12 grid place-items-center ring-inset 
               ring-2 ring-zinc-50/50 rounded-lg transition-[background-color,color]
-               hover:bg-zinc-50 hover:text-zinc-950 active:bg-zinc-50/80 reveal-up">
+               hover:bg-zinc-50 hover:text-zinc-950 active:bg-zinc-50/80 reveal-up"
+              >
                 {item.icon}
               </a>
             ))}
           </div>
         </div>
 
-        <form action="" method="POST" className="xl:pl-10 2xl:pl-20">
+        <form onSubmit={sendEmail} ref={form} className="xl:pl-10 2xl:pl-20">
           <div className="md:grid md:items-center md:grid-cols-2 md:gap-2">
             <div className="mb-4">
               <label htmlFor="name" className="label reveal-up">
@@ -73,7 +245,8 @@ const Contact = () => {
                 autoComplete="name"
                 placeholder="Erwin Smith"
                 required
-                className="text-field reveal-up"
+                disabled={isSubmitting}
+                className="text-field reveal-up disabled:opacity-50 disabled:cursor-not-allowed"
               />
             </div>
             <div className="mb-4">
@@ -81,13 +254,14 @@ const Contact = () => {
                 {t("contact.form.email")}
               </label>
               <input
-                type="text"
+                type="email"
                 id="email"
                 name="email"
                 autoComplete="email"
                 placeholder={t("contact.form.emailPlaceholder")}
                 required
-                className="text-field reveal-up"
+                disabled={isSubmitting}
+                className="text-field reveal-up disabled:opacity-50 disabled:cursor-not-allowed"
               />
             </div>
           </div>
@@ -101,13 +275,26 @@ const Contact = () => {
               name="message"
               placeholder={t("contact.form.messagePlaceholder")}
               required
-              className="text-field resize-y min-h-32 max-h-80 reveal-up"
+              disabled={isSubmitting}
+              className="text-field resize-y min-h-32 max-h-80 reveal-up disabled:opacity-50 disabled:cursor-not-allowed"
               autoComplete="off"
             ></textarea>
           </div>
 
-          <button type="submit" className="btn btn-primary [&]:max-w-full w-full justify-center reveal-up">
-            {t("buttons.submit")}
+          <button
+            type="submit"
+            disabled={isSubmitting}
+            className="btn btn-primary [&]:max-w-full w-full justify-center reveal-up disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
+          >
+            {isSubmitting && (
+              <div className="animate-spin inline-block size-4 border-[3px] border-current border-t-transparent rounded-full" role="status" aria-label="loading">
+                <span class="sr-only">Loading...</span>
+              </div>
+            )}
+            {isSubmitting 
+              ? (t("buttons.sending") || "Enviando...") 
+              : t("buttons.submit")
+            }
           </button>
         </form>
       </div>

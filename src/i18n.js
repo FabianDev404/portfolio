@@ -4,7 +4,7 @@ import LanguageDetector from "i18next-browser-languagedetector";
 
 const resources = {
   en: {
-    translation: { 
+    translation: {
       navigation: {
         home: "Home",
         about: "About",
@@ -18,6 +18,13 @@ const resources = {
         scrollDown: "Scroll down",
         submit: "Submit",
         startProject: "Start project",
+        sending: "Sending Email...",
+        sent: "Sent!",
+      },
+      toast: {
+        sending: "Sending Email...",
+        success: "Email sent successfully!",
+        error: "Error sending Email. Please try again.",
       },
       hero: {
         availableForWork: "Available for work",
@@ -110,10 +117,10 @@ const resources = {
         socials: "Socials",
         copyright: "© 2025 Fabian Espinoza",
       },
-    }
+    },
   },
   es: {
-    translation: { 
+    translation: {
       navigation: {
         home: "Inicio",
         about: "Acerca de",
@@ -121,12 +128,19 @@ const resources = {
         work: "Trabajo",
         contact: "Contacto",
       },
+      toast: {
+        sending: "Enviando correo...",
+        success: "Correo enviado satisdactoriamente",
+        error: "Error al enviar el correo. Por favor intente de nuevo.",
+      },
       buttons: {
         contactMe: "Contáctame",
         downloadCV: "Descargar CV",
         scrollDown: "Desplazar hacia abajo",
         submit: "Enviar",
         startProject: "Iniciar proyecto",
+        sending: "Enviando correo...",
+        sent: "Enviado!",
       },
       hero: {
         availableForWork: "Disponible para trabajar",
@@ -219,7 +233,7 @@ const resources = {
         socials: "Redes sociales",
         copyright: "© 2025 Fabian Espinoza",
       },
-    }
+    },
   },
 };
 
@@ -228,24 +242,24 @@ i18n
   .use(initReactI18next)
   .init({
     resources,
-    fallbackLng: 'en',
-    defaultNS: 'translation', // Explicitly set default namespace
-    ns: ['translation'], // Available namespaces
+    fallbackLng: "en",
+    defaultNS: "translation", // Explicitly set default namespace
+    ns: ["translation"], // Available namespaces
     debug: true,
     interpolation: {
-      escapeValue: false
+      escapeValue: false,
     },
     detection: {
-      order: ['localStorage', 'navigator', 'htmlTag'],
-      caches: ['localStorage'],
+      order: ["localStorage", "navigator", "htmlTag"],
+      caches: ["localStorage"],
       // Handle language code variations
       convertDetectedLanguage: (lng) => {
         // Convert en-US, en-GB, etc. to just 'en'
-        if (lng.startsWith('en')) return 'en';
-        if (lng.startsWith('es')) return 'es';
+        if (lng.startsWith("en")) return "en";
+        if (lng.startsWith("es")) return "es";
         return lng;
-      }
-    }
+      },
+    },
   });
 
 export default i18n;
