@@ -6,10 +6,10 @@ const About = () => {
       label: t("about.yearsExperience"),
       number: 4,
     },
-    {
-      label: t("about.projectsDone"),
-      number: 2,
-    }
+    // {
+    //   label: t("about.projectsDone"),
+    //   number: 2,
+    // }
   ];
   return (
     <section id="about" className="section">
