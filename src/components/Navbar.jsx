@@ -50,7 +50,7 @@ const Navbar = ({ navOpen }) => {
     },
     {
       label: "navigation.work",
-      link: "#work",
+      link: "#skill",
       className: "nav-link",
     },
     {
