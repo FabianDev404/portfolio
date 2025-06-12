@@ -6,11 +6,11 @@ const Timeline = () => {
   // This component renders a timeline with three events.
   // Each event has a date, title, description 
   const timelineData = [
-    {
-      date: "January 2025",
-      title: "Freelance Developer",
-      description: t("experience.freelance.description")
-    },
+    // {
+    //   date: "January 2025",
+    //   title: "Freelance Developer",
+    //   description: t("experience.freelance.description")
+    // },
     {
       date: "2022 - 2024",
       title: "Software Engineer Jr - Terumo Neuro",
