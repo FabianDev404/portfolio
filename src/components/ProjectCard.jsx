@@ -3,10 +3,9 @@ import PropTypes from "prop-types";
 
 const ProjectCard = ({ imgSrc, title, tags, projectLink, classes }) => {
   return (
-    <div className={`relative p-4 rounded-2xl bg-zinc-800 hover:bg-zinc-700/50 active:bg-zinc-700/60
-    ring-1 ring-inset ring-zinc-50/5 transition-colors ${classes}`}>
-      <figure className="img-box aspect-square rounded-lg mb-4">
-        <img src={imgSrc} alt="" loading="lazy" className="img-cover" />
+    <div className={`relative p-4 rounded-2xl bg-zinc-800 hover:bg-zinc-700/50 active:bg-zinc-700/60 ring-1 ring-inset ring-zinc-50/5 transition-colors ${classes}`}>
+      <figure className="w-full h-[220px] md:h-[280px] rounded-2xl overflow-hidden mb-5 bg-zinc-700">
+        <img src={imgSrc} alt={title} loading="lazy" className="w-full h-full object-cover object-center transition-transform duration-300 group-hover:scale-105" />
       </figure>
 
       <div className="flex items-center justify-between gap-4">
@@ -28,7 +27,7 @@ const ProjectCard = ({ imgSrc, title, tags, projectLink, classes }) => {
         </div>
       </div>
 
-      <a href={projectLink} className="absolute inset-0" target="_blank"></a>
+      <a href={projectLink} className="absolute inset-0" target="_blank" rel="noopener noreferrer"></a>
     </div>
   );
 };

@@ -5,62 +5,62 @@ const Skill = () => {
   const { t } = useTranslation();
   const skillItem = [
     {
-      imgSrc: "/images/html-5.svg",
+      imgSrc: "/images/tools/html-5.svg",
       label: "HTML",
       desc: t('tools.categories.structure'),
     },
     {
-      imgSrc: "/images/css3.svg",
+      imgSrc: "/images/tools/css3.svg",
       label: "CSS",
       desc: t('tools.categories.styling'),
     },
     {
-      imgSrc: "/images/javascript.svg",
+      imgSrc: "/images/tools/javascript.svg",
       label: "JavaScript",
       desc: t('tools.categories.programmingLanguage'),
     },
     {
-      imgSrc: "/images/git.svg",
+      imgSrc: "/images/tools/git.svg",
       label: "Git",
       desc: t('tools.categories.versionControl'),
     },
     {
-      imgSrc: "/images/php.svg",
+      imgSrc: "/images/tools/php.svg",
       label: "PHP",
       desc: t('tools.categories.serverSideLanguage'),
     },
     {
-      imgSrc: "/images/next.svg",
+      imgSrc: "/images/tools/next.svg",
       label: "Next Js",
-      desc: t('tools.categories.framework'),
+      desc: t('tools.categories.framework'),  
     },
     {
-      imgSrc: "/images/react.svg",
+      imgSrc: "/images/tools/react.svg",
       label: "React",
       desc: t('tools.categories.uiLibrary'),
     },
     {
-      imgSrc: "/images/tailwindcss.svg",
+      imgSrc: "/images/tools/tailwindcss.svg",
       label: "TailwindCSS",
       desc: t('tools.categories.cssFramework'),
     },
     {
-      imgSrc: "/images/typescript.svg",
+      imgSrc: "/images/tools/typescript.svg",
       label: "Typescript",
       desc: t('tools.categories.staticTyping'),
     },
     {
-      imgSrc: "/images/supabase.svg",
+      imgSrc: "/images/tools/supabase.svg",
       label: "Supabase",
       desc: t('tools.categories.backendAsService'),
     },
     {
-      imgSrc: "/images/postgresql.svg",
+      imgSrc: "/images/tools/postgresql.svg",
       label: "PostgreSQL",
       desc: t('tools.categories.database'),
     },
     {
-      imgSrc: "/images/clerk.com.svg",
+      imgSrc: "/images/tools/clerk.svg",
       label: "Clerk",
       desc: t('tools.categories.authentication'),
     },

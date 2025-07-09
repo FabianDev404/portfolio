@@ -10,6 +10,7 @@ const resources = {
         about: "About",
         experience: "Experience",
         work: "Work",
+        certificates: "Certificates",
         contact: "Contact",
       },
       buttons: {
@@ -98,6 +99,45 @@ const resources = {
           ecommerce: "eCommerce",
         },
       },
+      certificates: {
+        title: "My certificates",
+        subtitle:
+          "Take a look about the certificates and courses I have completed in my journey as a developer.",
+        certificates: {
+          bachelorDegree: {
+            title: "Bachelor's Degree in Software Engineering",
+            from: "National Technical University (UTN) - Costa Rica",
+          },
+          reactJs: {
+            title: "React",
+            from: "Udemy",
+          },
+          python: {
+            title: "Python",
+            from: "Python Institute",
+          },
+          snowflake: {
+            title: "Snowflake",
+            from: "Snowflake",
+          },
+          iot: {
+            title: "IoT",
+            from: "Cisco",
+          },
+          packetTracer: {
+            title: "Packet Tracer",
+            from: "Cisco",
+          },
+          english: {
+            title: "English",
+            from: "National Technical University (UTN) - Costa Rica",
+          },
+          cybersecurity: {
+            title: "Cybersecurity",
+            from: "Cisco",
+          },
+        }
+      },
       contact: {
         title: "Contact me for collaboration",
         subtitle:
@@ -126,6 +166,7 @@ const resources = {
         about: "Acerca de",
         experience: "Experiencia",
         work: "Trabajo",
+        certificates: "Certificados",
         contact: "Contacto",
       },
       toast: {
@@ -212,6 +253,45 @@ const resources = {
           spa: "SPA",
           webDesign: "Diseño Web",
           ecommerce: "Comercio Electrónico",
+        },
+      },
+      certificates: {
+        title: "Mis certificados",
+        subtitle:
+          "Echa un vistazo a los certificados y cursos que he completado en mi camino como desarrollador.",
+        certificates: {
+          bachelorDegree: {
+            title: "Bachillerato en Ingeniería de Software",
+            from: "Universidad Técnica Nacional (UTN) - Costa Rica",
+          },
+          reactJs: {
+            title: "React",
+            from: "Udemy",
+          },
+          python: {
+            title: "Python",
+            from: "Python Institute",
+          },
+          snowflake: {
+            title: "Snowflake",
+            from: "Snowflake",
+          },
+          iot: {
+            title: "IoT",
+            from: "Cisco",
+          },
+          packetTracer: {
+            title: "Packet Tracer",
+            from: "Cisco",
+          },
+          english: {
+            title: "Inglés",
+            from: "Universidad Técnica Nacional (UTN) - Costa Rica",
+          },
+          cybersecurity: {
+            title: "Ciberseguridad",
+            from: "Cisco",
+          },
         },
       },
       contact: {

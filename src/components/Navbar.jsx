@@ -26,10 +26,11 @@ const Navbar = ({ navOpen }) => {
     activeBox.current.style.height = e.target.offsetHeight + "px";
   };
 
-  useEffect(() => initActiveBox(), []);
-
-
-  window.addEventListener("resize", initActiveBox);
+  useEffect(() => {
+    initActiveBox();
+    window.addEventListener("resize", initActiveBox);
+    return () => window.removeEventListener("resize", initActiveBox);
+  }, [i18n.language]);
 
   const navItems = [
     {
@@ -51,6 +52,11 @@ const Navbar = ({ navOpen }) => {
     {
       label: "navigation.work",
       link: "#skill",
+      className: "nav-link",
+    },
+    {
+      label: "navigation.certificates",
+      link: "#certificates",
       className: "nav-link",
     },
     {

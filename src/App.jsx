@@ -9,6 +9,7 @@ import Skill from "./components/Skill";
 import Work from "./components/Work";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
+import Certificates from "./components/Certificates";
 
 /**
  * Node Modules
@@ -48,8 +49,9 @@ const App = () => {
         <Hero />
         <About />
         <Experience />
-        <Skill />
         {/* <Work /> */}
+        <Skill />
+        <Certificates />
         <Contact />
       </main>
       <Footer />
