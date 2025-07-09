@@ -11,7 +11,7 @@ const CertificateCard = ({ imgSrc, title, from, src, classes = '' }) => {
       tabIndex={0}
       aria-label={`${title} - ${from}`}
     >
-      <figure className="flex overflow-hidden justify-center items-center mx-auto mb-4 w-80 h-60 bg-white rounded-xl shadow transition-transform group-hover:scale-105">
+      <figure className="mx-auto w-full h-60 md:h-64 bg-white rounded-xl overflow-hidden flex justify-center items-center shadow transition-transform group-hover:scale-105 mb-4">
         <img src={imgSrc} alt={title} className="object-contain" loading="lazy" />
       </figure>
       <h3 className="mb-1 text-lg font-semibold transition-colors text-zinc-200 group-hover:text-sky-400">{title}</h3>

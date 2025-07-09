@@ -21,6 +21,8 @@ const resources = {
         startProject: "Start project",
         sending: "Sending Email...",
         sent: "Sent!",
+        showMore: "Show more",
+        showLess: "Show less",
       },
       toast: {
         sending: "Sending Email...",
@@ -182,6 +184,8 @@ const resources = {
         startProject: "Iniciar proyecto",
         sending: "Enviando correo...",
         sent: "Enviado!",
+        showMore: "Mostrar más",
+        showLess: "Mostrar menos",
       },
       hero: {
         availableForWork: "Disponible para trabajar",

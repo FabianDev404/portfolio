@@ -78,11 +78,21 @@ const Certificates = () => {
         <div className="flex justify-center">
           <button
             className="btn btn-secondary"
-            onClick={() => setShowAll((s) => !s)}
+            onClick={() => {
+              setShowAll((s) => {
+                const next = !s;
+                if (s) {
+                  setTimeout(() => {
+                    document.getElementById('certificates').scrollIntoView({ behavior: 'smooth', block: 'start' });
+                  }, 100);
+                }
+                return next;
+              });
+            }}
           >
             {showAll
-              ? t("buttons.showLess", "Ver menos")
-              : t("buttons.showMore", "Ver más")}
+              ? t("buttons.showLess")
+              : t("buttons.showMore")}
           </button>
         </div>
       </div>
